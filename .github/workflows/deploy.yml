@@ -5,6 +5,15 @@ on:
     branches:
       - develop
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to Azure?'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
 jobs:
   build:
@@ -32,24 +41,15 @@ jobs:
       - name: Publish
         run: dotnet publish HelloWorld/HelloWorld.csproj --configuration Release --output ./publish
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: drop
-          path: ./publish
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' && github.inputs.deploy == 'true'
     
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
         with:
-          name: drop
-
-      - name: Deploy
-        run: |
-          echo "Add your deployment commands here"
-          # Example: az webapp deploy --name your-app --resource-group your-rg --slot production
+          app-name: HelloWorld-BelieveIt
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./publish
