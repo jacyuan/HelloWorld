@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - develop
+
+jobs:
+  - job: BuildTestDeploy
+    displayName: 'Build, Test and Deploy'
+
+    pool:
+      vmImage: "ubuntu-latest"
+    
+    steps:
+      # ========================================
+      # Checkout
+      # ========================================
+      - checkout: self
+        clean: true
+        submodules: true
+        fetchDepth: 0
+        displayName: 'Checkout Source Code'
+
+      # ========================================
+      # Install .NET SDK
+      # ========================================
+      - task: UseDotNet@2
+        inputs:
+          packageType: "sdk"
+          version: "9.x"
+          installationPath: $(Agent.ToolsDirectory)/dotnet
+        displayName: "Install .NET SDK"
+
+      # ========================================
+      # Restore NuGet packages
+      # ========================================
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: "restore"
+          projects: "HelloWorld.sln"
+        displayName: "Restore NuGet packages"
