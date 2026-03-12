@@ -24,10 +24,10 @@ Azure CLI scripts for provisioning and tearing down the HelloWorld App Service.
 
 ```bash
 # Create resources
-bash infra/create-app-service.sh
+sh infra/create-app-service.sh
 
 # Tear down resources
-bash infra/teardown.sh
+sh infra/teardown.sh
 ```
 
 ## Post-setup

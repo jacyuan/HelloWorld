@@ -46,6 +46,20 @@ else
     echo "[OK] App Service created."
 fi
 
+# --- Run from package mode ---
+# Sets WEBSITE_RUN_FROM_PACKAGE=1 so Azure runs the app directly from the deployed zip.
+# Without this, after a zip deploy on Linux, the app keeps serving the old code
+# until a manual stop/start. This setting makes Azure pick up the new package
+# automatically on each deployment, removing the need for a restart.
+echo "[..] Enabling run-from-package mode..."
+"$AZ_CMD" webapp config appsettings set \
+    --name "$APP_SERVICE_NAME" \
+    --resource-group "$RESOURCE_GROUP" \
+    --settings WEBSITE_RUN_FROM_PACKAGE=1 &>/dev/null
+echo "[OK] Run-from-package mode enabled."
+
+echo ""
+
 # --- Enable basic auth (required for publish profile download) ---
 echo "[..] Enabling basic authentication for publish profile..."
 "$AZ_CMD" resource update \
