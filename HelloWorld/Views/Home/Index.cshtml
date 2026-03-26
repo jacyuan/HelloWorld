@@ -4,14 +4,16 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome Yuan</h1>
+    <h1 class="display-4">
+        @if (Model.MaintenanceMode)
+        {
+            <p>Currently in maintenance mode.</p>
+        }
+        else
+        {
+            <p>Welcome Yuan</p>
+        }
+    </h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @if (Model.MaintenanceMode)
-    {
-        <p>online</p>
-    }
-    else
-    {
-        <p>offline</p>
-    }
+    
 </div>
