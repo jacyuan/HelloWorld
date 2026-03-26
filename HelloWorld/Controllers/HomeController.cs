@@ -33,6 +33,13 @@ namespace HelloWorld.Controllers
                 QuestionCount = questionCount,
             };
 
+            _logger.LogInformation("========================================");
+            _logger.LogInformation("  PAGE D'ACCUEIL CHARGEE");
+            _logger.LogInformation("  Heure : {Time}", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"));
+            _logger.LogInformation("  Quiz  : {QuizCount}", quizCount);
+            _logger.LogInformation("  Questions : {QuestionCount}", questionCount);
+            _logger.LogInformation("========================================");
+
             return View(model);
         }
 
