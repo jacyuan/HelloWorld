@@ -1,6 +1,6 @@
 # Infrastructure Scripts
 
-Azure CLI scripts for provisioning and tearing down the HelloWorld App Service.
+Azure CLI scripts for provisioning and tearing down cloud resources.
 
 ## Prerequisites
 
@@ -12,22 +12,25 @@ Azure CLI scripts for provisioning and tearing down the HelloWorld App Service.
   az group show --name <RESOURCE_GROUP> --output table
   ```
 
-## Files
+## Structure
 
-| File | Description |
-|------|-------------|
-| `variables.sh` | All configurable values (resource names, SKU, region). Edit this to change settings. |
-| `create-app-service.sh` | Creates App Service Plan and App Service. Safe to re-run (idempotent). |
-| `teardown.sh` | Deletes App Service and App Service Plan. Prompts for confirmation. |
+```
+infra/
+├── variables.sh              # Shared configuration (resource names, SKU, region)
+├── app-service/
+│   ├── create.sh             # Creates App Service Plan + App Service (idempotent)
+│   └── teardown.sh           # Deletes App Service + App Service Plan
+└── README.md
+```
 
 ## Usage
 
 ```bash
-# Create resources
-sh infra/create-app-service.sh
+# Create App Service resources
+sh infra/app-service/create.sh
 
-# Tear down resources
-sh infra/teardown.sh
+# Tear down App Service resources
+sh infra/app-service/teardown.sh
 ```
 
 ## Post-setup
@@ -43,3 +46,4 @@ After creating the App Service, retrieve the publish profile for GitHub Actions 
 
 - The resource group is shared and is **never deleted** by these scripts.
 - The App Service Plan uses the **F1 (Free)** tier by default. Change `SKU` in `variables.sh` to upgrade.
+- `variables.sh` stays at the infra root so it can be shared across resource-type subfolders.

@@ -6,7 +6,7 @@ set -e
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/variables.sh"
+source "$SCRIPT_DIR/../variables.sh"
 
 echo "=== Azure App Service Setup ==="
 echo "Resource Group:    $RESOURCE_GROUP"
