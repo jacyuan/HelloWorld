@@ -27,7 +27,7 @@ RUNTIME="DOTNETCORE:10.0"
 SQL_SERVER_NAME="helloworld-yuan-sqlserver"  # Must be globally unique
 LOCATION_SQL="francecentral"
 SQL_ADMIN_USER="dbserveradmin"
-SQL_ADMIN_PASSWORD="Admin01_HelloWorldYuan"  # Set via environment variable or pass as argument
+SQL_ADMIN_PASSWORD=""  # Set via environment variable or pass as argument
 SQL_ENTRA_ADMIN_EMAIL="yuan.lin@believeit.fr"  # Set to the Entra user/group email to be SQL admin
 
 # SQL Database
@@ -46,5 +46,4 @@ SQL_BACKUP_REDUNDANCY="Local"
 #   "VPN-Range:10.0.0.1:10.0.0.255"          — IP range
 SQL_FIREWALL_RULES=(
     # "MyIP:x.x.x.x:x.x.x.x"
-    "Home:176.142.246.79:176.142.246.79"
 )
