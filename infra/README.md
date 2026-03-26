@@ -20,6 +20,9 @@ infra/
 ├── app-service/
 │   ├── create.sh             # Creates App Service Plan + App Service (idempotent)
 │   └── teardown.sh           # Deletes App Service + App Service Plan
+├── sql/
+│   ├── create.sh             # Creates SQL Server + SQL Database (idempotent)
+│   └── teardown.sh           # Deletes SQL Database + SQL Server
 └── README.md
 ```
 
@@ -29,8 +32,14 @@ infra/
 # Create App Service resources
 sh infra/app-service/create.sh
 
+# Create SQL resources (prompts for admin password if not set)
+SQL_ADMIN_PASSWORD="YourPassword" sh infra/sql/create.sh
+
 # Tear down App Service resources
 sh infra/app-service/teardown.sh
+
+# Tear down SQL resources
+sh infra/sql/teardown.sh
 ```
 
 ## Post-setup
