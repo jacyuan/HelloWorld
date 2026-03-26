@@ -20,5 +20,5 @@ APP_SERVICE_PLAN="HelloWorld-BelieveIt-Plan"
 SKU="F1"
 
 # App Service
-APP_SERVICE_NAME="HelloWorld-BelieveIt"
+APP_SERVICE_NAME="HelloWorld-Yuan"
 RUNTIME="DOTNETCORE:10.0"
