@@ -12,29 +12,29 @@ AZ_CMD="C:\Tools\azure-cli\bin\az.cmd"
 # Shared resource group
 RESOURCE_GROUP="RG-Student-04"
 
-# Region
-LOCATION="westeurope"
+# Regions
+APP_SERVICE_LOCATION="westeurope"
 
 # App Service Plan
-APP_SERVICE_PLAN="HelloWorld-BelieveIt-Plan"
+APP_SERVICE_PLAN="HelloWorld-AppServicePlan"
 SKU="F1"
 
 # App Service
-APP_SERVICE_NAME="HelloWorld-Yuan"
+APP_SERVICE_NAME="HelloWorld-AppService"
 RUNTIME="DOTNETCORE:10.0"
 # Activate application logging and set log level (optional)
 APP_LOG_ENABLED="true"
 APP_LOG_LEVEL="information"  # verbose, information, warning, error
 
 # SQL Server
-SQL_SERVER_NAME="helloworld-yuan-sqlserver"  # Must be globally unique
-LOCATION_SQL="francecentral"
+SQL_SERVER_NAME="HelloWorld-SqlServer"  # Must be globally unique
+SQL_LOCATION="francecentral"
 SQL_ADMIN_USER="dbserveradmin"
 SQL_ADMIN_PASSWORD=""  # Set via environment variable or pass as argument
 SQL_ENTRA_ADMIN_EMAIL="yuan.lin@believeit.fr"  # Set to the Entra user/group email to be SQL admin
 
 # SQL Database
-SQL_DATABASE_NAME="HelloWorldYuanDb"
+SQL_DATABASE_NAME="HelloWorldDb"
 SQL_SKU="Basic"
 SQL_USE_ELASTIC_POOL="false"
 SQL_ELASTIC_POOL_NAME=""

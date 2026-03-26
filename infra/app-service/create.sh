@@ -10,7 +10,7 @@ source "$SCRIPT_DIR/../variables.sh"
 
 echo "=== Azure App Service Setup ==="
 echo "Resource Group:    $RESOURCE_GROUP"
-echo "Location:          $LOCATION"
+echo "Location:          $APP_SERVICE_LOCATION"
 echo "App Service Plan:  $APP_SERVICE_PLAN (SKU: $SKU)"
 echo "App Service:       $APP_SERVICE_NAME"
 echo "Runtime:           $RUNTIME"
@@ -25,7 +25,7 @@ else
     "$AZ_CMD" appservice plan create \
         --name "$APP_SERVICE_PLAN" \
         --resource-group "$RESOURCE_GROUP" \
-        --location "$LOCATION" \
+        --location "$APP_SERVICE_LOCATION" \
         --sku "$SKU" \
         --is-linux
     echo "[OK] App Service Plan created."
@@ -84,6 +84,7 @@ if [ "$APP_LOG_ENABLED" = "true" ]; then
     "$AZ_CMD" webapp log config \
         --name "$APP_SERVICE_NAME" \
         --resource-group "$RESOURCE_GROUP" \
+        --docker-container-logging filesystem \
         --application-logging filesystem \
         --level "$APP_LOG_LEVEL" \
         --detailed-error-messages true &>/dev/null

@@ -19,7 +19,7 @@ fi
 
 echo "=== Azure SQL Setup ==="
 echo "Resource Group:  $RESOURCE_GROUP"
-echo "Location:        $LOCATION_SQL"
+echo "Location:        $SQL_LOCATION"
 echo "SQL Server:      $SQL_SERVER_NAME"
 echo "SQL Database:    $SQL_DATABASE_NAME (SKU: $SQL_SKU)"
 echo "Elastic Pool:    $SQL_USE_ELASTIC_POOL ($SQL_ELASTIC_POOL_NAME)"
@@ -48,7 +48,7 @@ else
     if "$AZ_CMD" sql server create \
         --name "$SQL_SERVER_NAME" \
         --resource-group "$RESOURCE_GROUP" \
-        --location "$LOCATION_SQL" \
+        --location "$SQL_LOCATION" \
         --admin-user "$SQL_ADMIN_USER" \
         --admin-password "$SQL_ADMIN_PASSWORD" \
         --external-admin-principal-type User \
