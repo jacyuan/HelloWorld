@@ -8,17 +8,31 @@ namespace HelloWorld.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly QuizDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(
+            QuizDbContext context,
+            ILogger<HomeController> logger,
+            IConfiguration configuration
+        )
         {
             _logger = logger;
             _configuration = configuration;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             var maintenanceMode = _configuration.GetValue<bool>("MaintenanceMode");
-            var model = new HomeViewModel { MaintenanceMode = maintenanceMode };
+            var quizCount = _context.Quizzes.Count();
+            var questionCount = _context.Questions.Count();
+            var model = new HomeViewModel
+            {
+                MaintenanceMode = maintenanceMode,
+                QuizCount = quizCount,
+                QuestionCount = questionCount,
+            };
+
             return View(model);
         }
 
@@ -30,7 +44,12 @@ namespace HelloWorld.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(
+                new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                }
+            );
         }
     }
 }
