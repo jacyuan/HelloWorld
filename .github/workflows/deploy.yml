@@ -4,16 +4,6 @@ on:
   push:
     branches:
       - develop
-  workflow_dispatch:
-    inputs:
-      deploy:
-        description: 'Deploy to Azure?'
-        required: true
-        default: 'false'
-        type: choice
-        options:
-          - 'false'
-          - 'true'
 
 jobs:
   build:
@@ -56,7 +46,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.deploy == 'true'
     
     steps:
       - name: Download artifact
