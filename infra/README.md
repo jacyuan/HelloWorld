@@ -16,6 +16,8 @@ Azure CLI scripts for provisioning and tearing down cloud resources.
 
 ```
 infra/
+├── create.sh                 # Interactive: create one or all resources
+├── teardown.sh               # Interactive: tear down one or all resources
 ├── variables.sh              # Shared configuration (resource names, SKU, region)
 ├── app-service/
 │   ├── create.sh             # Creates App Service Plan + App Service (idempotent)
@@ -29,24 +31,37 @@ infra/
 ## Usage
 
 ```bash
-# Create App Service resources
+# Interactive: choose which resource to create (or all)
+sh infra/create.sh
+
+# Interactive: choose which resource to tear down (or all)
+sh infra/teardown.sh
+
+# Or run individually
 sh infra/app-service/create.sh
-
-# Create SQL resources (prompts for admin password if not set)
-SQL_ADMIN_PASSWORD="YourPassword" sh infra/sql/create.sh
-
-# Tear down App Service resources
+sh infra/sql/create.sh
 sh infra/app-service/teardown.sh
-
-# Tear down SQL resources
 sh infra/sql/teardown.sh
 ```
+
+## What the create scripts do
+
+### App Service (`app-service/create.sh`)
+- Creates App Service Plan + App Service
+- Enables run-from-package mode
+- Enables basic auth for publish profile download
+- Enables application logging (filesystem, Information level)
+
+### SQL (`sql/create.sh`)
+- Creates SQL Server (SQL + Entra auth)
+- Configures firewall rules (Azure services + IP whitelist)
+- Creates SQL Database
 
 ## Post-setup
 
 After creating the App Service, retrieve the publish profile for GitHub Actions deployment:
 
-1. Go to [Azure Portal](https://portal.azure.com) > App Service > `HelloWorld-BelieveIt`
+1. Go to [Azure Portal](https://portal.azure.com) > App Service > `HelloWorld-Yuan`
 2. Click **Download publish profile**
 3. In your GitHub repo, go to **Settings > Secrets and variables > Actions**
 4. Create secret `AZURE_WEBAPP_PUBLISH_PROFILE` with the profile contents

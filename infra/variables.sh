@@ -22,6 +22,9 @@ SKU="F1"
 # App Service
 APP_SERVICE_NAME="HelloWorld-Yuan"
 RUNTIME="DOTNETCORE:10.0"
+# Activate application logging and set log level (optional)
+APP_LOG_ENABLED="true"
+APP_LOG_LEVEL="information"  # verbose, information, warning, error
 
 # SQL Server
 SQL_SERVER_NAME="helloworld-yuan-sqlserver"  # Must be globally unique

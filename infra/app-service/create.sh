@@ -78,5 +78,19 @@ echo "[..] Enabling basic authentication for publish profile..."
     --set properties.allow=true &>/dev/null
 echo "[OK] Basic authentication enabled."
 
+# --- Application logging (filesystem) ---
+if [ "$APP_LOG_ENABLED" = "true" ]; then
+    echo "[..] Enabling application logging (filesystem, level: $APP_LOG_LEVEL)..."
+    "$AZ_CMD" webapp log config \
+        --name "$APP_SERVICE_NAME" \
+        --resource-group "$RESOURCE_GROUP" \
+        --application-logging filesystem \
+        --level "$APP_LOG_LEVEL" \
+        --detailed-error-messages true &>/dev/null
+    echo "[OK] Application logging enabled."
+else
+    echo "[--] Application logging disabled. Skipping."
+fi
+
 echo ""
 echo "=== Done ==="

@@ -16,10 +16,12 @@ echo "  - Resource Group:   $RESOURCE_GROUP (NOT deleted — shared)"
 echo "==================================="
 echo ""
 
-read -p "Are you sure? (y/N) " confirm
-if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
-    echo "Aborted."
-    exit 0
+if [ "$SKIP_CONFIRM" != "1" ]; then
+    read -p "Are you sure? (y/N) " confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+        echo "Aborted."
+        exit 0
+    fi
 fi
 
 echo ""
