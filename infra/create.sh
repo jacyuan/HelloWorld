@@ -7,6 +7,7 @@ source "$SCRIPT_DIR/variables.sh"
 RESOURCES=(
     "sql:SQL Server + Database"
     "app-service:App Service (Plan + Web App)"
+    "storage:Storage Account"
 )
 
 echo "=== Create Azure Resources ==="

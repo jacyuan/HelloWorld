@@ -25,6 +25,9 @@ infra/
 ├── sql/
 │   ├── create.sh             # Creates SQL Server + SQL Database (idempotent)
 │   └── teardown.sh           # Deletes SQL Database + SQL Server
+├── storage/
+│   ├── create.sh             # Creates Storage Account (idempotent)
+│   └── teardown.sh           # Deletes Storage Account
 └── README.md
 ```
 
@@ -49,8 +52,10 @@ sh infra/teardown.sh
 # Or run individually
 sh infra/app-service/create.sh
 sh infra/sql/create.sh
+sh infra/storage/create.sh
 sh infra/app-service/teardown.sh
 sh infra/sql/teardown.sh
+sh infra/storage/teardown.sh
 ```
 
 ## What the create scripts do
@@ -76,6 +81,11 @@ sh infra/sql/teardown.sh
 - Creates SQL Server (SQL + Entra auth)
 - Configures firewall rules (Azure services + IP whitelist)
 - Creates SQL Database
+
+### Storage (`storage/create.sh`)
+
+- Creates a Standard_LRS storage account
+- Reuses `$RESOURCE_GROUP` and `$APP_SERVICE_LOCATION` from `variables.sh`
 
 ## Post-setup (when running scripts individually)
 

@@ -50,3 +50,12 @@ SQL_BACKUP_REDUNDANCY="Local"
 SQL_FIREWALL_RULES=(
     # "MyIP:x.x.x.x:x.x.x.x"
 )
+
+# =============================================================================
+# Storage Account
+# =============================================================================
+# Reuses $RESOURCE_GROUP and $APP_SERVICE_LOCATION.
+# To pair the storage account with SQL instead, change the --location reference
+# in storage/create.sh to "$SQL_LOCATION".
+STORAGE_ACCOUNT_NAME="azurequizlab04"   # 3-24 chars, lowercase letters + digits, globally unique
+STORAGE_ACCOUNT_SKU="Standard_LRS"      # Standard performance, locally redundant storage
