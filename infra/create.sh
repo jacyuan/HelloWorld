@@ -8,6 +8,7 @@ RESOURCES=(
     "sql:SQL Server + Database"
     "app-service:App Service (Plan + Web App)"
     "storage:Storage Account"
+    "function:Function App"
 )
 
 echo "=== Create Azure Resources ==="

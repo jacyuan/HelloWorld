@@ -28,6 +28,9 @@ infra/
 ├── storage/
 │   ├── create.sh             # Creates Storage Account (idempotent)
 │   └── teardown.sh           # Deletes Storage Account
+├── function/
+│   ├── create.sh             # Creates Function App (Consumption, idempotent)
+│   └── teardown.sh           # Deletes Function App + orphaned consumption plan
 └── README.md
 ```
 
@@ -53,9 +56,11 @@ sh infra/teardown.sh
 sh infra/app-service/create.sh
 sh infra/sql/create.sh
 sh infra/storage/create.sh
+sh infra/function/create.sh
 sh infra/app-service/teardown.sh
 sh infra/sql/teardown.sh
 sh infra/storage/teardown.sh
+sh infra/function/teardown.sh
 ```
 
 ## What the create scripts do
@@ -86,6 +91,13 @@ sh infra/storage/teardown.sh
 
 - Creates a Standard_LRS storage account
 - Reuses `$RESOURCE_GROUP` and `$APP_SERVICE_LOCATION` from `variables.sh`
+
+### Function App (`function/create.sh`)
+
+- Creates a Consumption-plan Function App (Windows, .NET isolated worker)
+- Reuses `$RESOURCE_GROUP`, `$APP_SERVICE_LOCATION`, and `$STORAGE_ACCOUNT_NAME`
+- Errors out if the storage account doesn't exist yet — run `storage/create.sh` first
+- Teardown also cleans up the implicit Y1 consumption plan when it has no other apps
 
 ## Post-setup (when running scripts individually)
 

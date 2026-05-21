@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
+VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld\HelloWorld.csproj", "{33484DDD-EB9D-4659-B822-C9EE65CF1B5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQuizLabFunctions", "AzureQuizLabFunctions\AzureQuizLabFunctions.csproj", "{8D7A71BF-07E1-42F7-9780-B3908333C1DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{33484DDD-EB9D-4659-B822-C9EE65CF1B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33484DDD-EB9D-4659-B822-C9EE65CF1B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33484DDD-EB9D-4659-B822-C9EE65CF1B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7A71BF-07E1-42F7-9780-B3908333C1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7A71BF-07E1-42F7-9780-B3908333C1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7A71BF-07E1-42F7-9780-B3908333C1DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7A71BF-07E1-42F7-9780-B3908333C1DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

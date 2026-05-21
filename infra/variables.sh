@@ -30,7 +30,7 @@ APP_LOG_LEVEL="information"  # verbose, information, warning, error
 SQL_SERVER_NAME="HelloWorld-Yuan-SqlServer"  # Must be globally unique
 SQL_LOCATION="francecentral"
 SQL_ADMIN_USER="dbserveradmin"
-SQL_ADMIN_PASSWORD=""  # Set via environment variable or pass as argument
+SQL_ADMIN_PASSWORD="AdminDb_04_PacceM0rd"  # Set via environment variable or pass as argument
 SQL_ENTRA_ADMIN_EMAIL="yuan.lin@believeit.fr"  # Set to the Entra user/group email to be SQL admin
 
 # SQL Database
@@ -49,6 +49,7 @@ SQL_BACKUP_REDUNDANCY="Local"
 #   "VPN-Range:10.0.0.1:10.0.0.255"          — IP range
 SQL_FIREWALL_RULES=(
     # "MyIP:x.x.x.x:x.x.x.x"
+    "HOME:176.142.246.79:176.142.246.79"
 )
 
 # =============================================================================
@@ -59,3 +60,16 @@ SQL_FIREWALL_RULES=(
 # in storage/create.sh to "$SQL_LOCATION".
 STORAGE_ACCOUNT_NAME="azurequizlab04"   # 3-24 chars, lowercase letters + digits, globally unique
 STORAGE_ACCOUNT_SKU="Standard_LRS"      # Standard performance, locally redundant storage
+
+# =============================================================================
+# Function App
+# =============================================================================
+# Reuses $RESOURCE_GROUP, $APP_SERVICE_LOCATION, and $STORAGE_ACCOUNT_NAME.
+# The create script currently only handles "consumption". To support flex/premium/
+# appservice, extend function/create.sh with a case branch on FUNCTION_APP_PLAN_TYPE.
+FUNCTION_APP_NAME="azurequizlab-functions-04"   # 2-60 chars, globally unique
+FUNCTION_APP_PLAN_TYPE="consumption"            # consumption | flex | premium | appservice
+FUNCTION_APP_OS="windows"                       # windows | linux
+FUNCTION_APP_RUNTIME="dotnet-isolated"          # required for .NET 5+ (in-process is being retired)
+FUNCTION_APP_RUNTIME_VERSION="9"              # .NET runtime version
+FUNCTIONS_VERSION="4"                           # Azure Functions runtime (host) version

@@ -6,6 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RESOURCES=(
     "app-service:App Service (Plan + Web App)"
     "sql:SQL Server + Database"
+    "function:Function App"
     "storage:Storage Account"
 )
 
