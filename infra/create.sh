@@ -9,6 +9,7 @@ RESOURCES=(
     "app-service:App Service (Plan + Web App)"
     "storage:Storage Account"
     "function:Function App"
+    "keyvault:Key Vault"
 )
 
 echo "=== Create Azure Resources ==="

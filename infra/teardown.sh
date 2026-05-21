@@ -8,6 +8,7 @@ RESOURCES=(
     "sql:SQL Server + Database"
     "function:Function App"
     "storage:Storage Account"
+    "keyvault:Key Vault"
 )
 
 echo "=== Teardown Azure Resources ==="

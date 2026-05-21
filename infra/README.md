@@ -31,6 +31,9 @@ infra/
 ├── function/
 │   ├── create.sh             # Creates Function App (Consumption, idempotent)
 │   └── teardown.sh           # Deletes Function App + orphaned consumption plan
+├── keyvault/
+│   ├── create.sh             # Creates Key Vault (idempotent, RBAC-enabled)
+│   └── teardown.sh           # Soft-deletes Key Vault (optional purge)
 └── README.md
 ```
 
@@ -57,10 +60,12 @@ sh infra/app-service/create.sh
 sh infra/sql/create.sh
 sh infra/storage/create.sh
 sh infra/function/create.sh
+sh infra/keyvault/create.sh
 sh infra/app-service/teardown.sh
 sh infra/sql/teardown.sh
 sh infra/storage/teardown.sh
 sh infra/function/teardown.sh
+sh infra/keyvault/teardown.sh
 ```
 
 ## What the create scripts do
@@ -98,6 +103,15 @@ sh infra/function/teardown.sh
 - Reuses `$RESOURCE_GROUP`, `$APP_SERVICE_LOCATION`, and `$STORAGE_ACCOUNT_NAME`
 - Errors out if the storage account doesn't exist yet — run `storage/create.sh` first
 - Teardown also cleans up the implicit Y1 consumption plan when it has no other apps
+
+### Key Vault (`keyvault/create.sh`)
+
+- Creates a Key Vault with RBAC authorization enabled (the modern default)
+- Soft-delete is always on (Azure requirement since 2020); retention defaults to 90 days
+- Idempotent: re-running detects an existing vault, **or recovers a soft-deleted one** with the same name
+- Purge protection is **off** by default — enable it via `KEY_VAULT_ENABLE_PURGE_PROTECTION=true` for prod (irreversible)
+- Optional self role assignment via `KEY_VAULT_SELF_ROLE` (e.g. `"Key Vault Secrets Officer"`)
+- Teardown soft-deletes the vault; set `KEY_VAULT_PURGE_ON_TEARDOWN=true` in your shell to also purge it
 
 ## Post-setup (when running scripts individually)
 

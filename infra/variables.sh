@@ -62,6 +62,26 @@ STORAGE_ACCOUNT_NAME="azurequizlab04"   # 3-24 chars, lowercase letters + digits
 STORAGE_ACCOUNT_SKU="Standard_LRS"      # Standard performance, locally redundant storage
 
 # =============================================================================
+# Key Vault
+# =============================================================================
+# Reuses $RESOURCE_GROUP. Vault names are globally unique within the soft-delete
+# retention window (i.e. a deleted vault still reserves its name for 7-90 days).
+KEY_VAULT_NAME="helloworld-yuan"                # 3-24 chars, alphanumeric + hyphens, globally unique
+KEY_VAULT_LOCATION="francecentral"              # Independent location (paired with SQL by default)
+KEY_VAULT_SKU="standard"                        # standard | premium
+KEY_VAULT_ENABLE_RBAC="true"                    # RBAC authorization (recommended over access policies)
+KEY_VAULT_ENABLE_PURGE_PROTECTION="false"       # IRREVERSIBLE once true — blocks early purge
+KEY_VAULT_RETENTION_DAYS="90"                   # 7-90, soft-delete retention period
+KEY_VAULT_PUBLIC_NETWORK_ACCESS="Enabled"       # Enabled | Disabled (use private endpoint if Disabled)
+
+# Optional: RBAC role to grant the current signed-in principal on create.
+# Without a role, you cannot read/write secrets even if you created the vault.
+# Common roles: "Key Vault Administrator", "Key Vault Secrets Officer",
+#               "Key Vault Crypto Officer", "Key Vault Certificates Officer".
+# Leave empty ("") to skip role assignment.
+KEY_VAULT_SELF_ROLE=""
+
+# =============================================================================
 # Function App
 # =============================================================================
 # Reuses $RESOURCE_GROUP, $APP_SERVICE_LOCATION, and $STORAGE_ACCOUNT_NAME.
