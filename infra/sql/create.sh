@@ -121,5 +121,13 @@ else
     echo "[OK] SQL Database created."
 fi
 
+# --- Grant data-plane access to Entra principals (App Service MI, etc.) ---
+if [ ${#SQL_DB_PRINCIPALS[@]} -gt 0 ]; then
+    echo ""
+    sh "$SCRIPT_DIR/grant-access.sh" || {
+        echo "[WARN] Grant step failed. Re-run manually: sh infra/sql/grant-access.sh"
+    }
+fi
+
 echo ""
 echo "=== Done ==="

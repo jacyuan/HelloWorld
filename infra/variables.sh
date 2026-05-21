@@ -41,6 +41,19 @@ SQL_ELASTIC_POOL_NAME=""
 SQL_WORKLOAD_ENV="Development"
 SQL_BACKUP_REDUNDANCY="Local"
 
+# SQL Database — Entra principals to grant data-plane access
+# Format: "principal_name:role1,role2,..." (one entry per line)
+# - principal_name is the Entra display name (for a system-assigned MI on an
+#   App Service / Function App, this equals the resource name).
+# - roles is any comma-separated list of fixed DB roles: db_datareader,
+#   db_datawriter, db_ddladmin, db_owner, ...
+# Idempotent: re-running skips users that already exist and re-adds role
+# memberships (no-op if already a member).
+SQL_DB_PRINCIPALS=(
+    "$APP_SERVICE_NAME:db_datareader,db_datawriter"
+    # "$FUNCTION_APP_NAME:db_datareader,db_datawriter"
+)
+
 # SQL Firewall — IP whitelist for remote access
 # Format: "RuleName:StartIP:EndIP" (one entry per line)
 # For a single IP, use the same value for start and end.

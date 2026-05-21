@@ -24,6 +24,7 @@ infra/
 │   └── teardown.sh           # Deletes App Service + App Service Plan
 ├── sql/
 │   ├── create.sh             # Creates SQL Server + SQL Database (idempotent)
+│   ├── grant-access.sh       # Grants Entra principals data-plane access (idempotent)
 │   └── teardown.sh           # Deletes SQL Database + SQL Server
 ├── storage/
 │   ├── create.sh             # Creates Storage Account (idempotent)
@@ -91,6 +92,18 @@ sh infra/keyvault/teardown.sh
 - Creates SQL Server (SQL + Entra auth)
 - Configures firewall rules (Azure services + IP whitelist)
 - Creates SQL Database
+- Calls `grant-access.sh` to grant data-plane access to `$SQL_DB_PRINCIPALS`
+
+### SQL grants (`sql/grant-access.sh`)
+
+- Standalone, idempotent. Runnable any time without re-creating the DB.
+- Reads `$SQL_DB_PRINCIPALS` from `variables.sh` (format: `"name:role1,role2"`)
+- Issues `CREATE USER ... FROM EXTERNAL PROVIDER` + `ALTER ROLE ... ADD MEMBER`
+- Auth: uses your `az login` session (no interactive password prompt) via
+  `sqlcmd --authentication-method ActiveDirectoryDefault`, falling back to
+  PowerShell + `Invoke-Sqlcmd -AccessToken` on Windows
+- **Required for App Service / Function App MIs to talk to SQL** — without
+  this, every request gets `Login failed for user '<token-identified principal>'`
 
 ### Storage (`storage/create.sh`)
 
